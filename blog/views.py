@@ -5,6 +5,7 @@ from rest_framework.mixins import (CreateModelMixin, ListModelMixin,
 from blog.models import BlogEntry
 from blog.paginations import BlogEntryPagination
 from blog.serializers import BlogEntrySerializer
+from blog.permissions import BlogEntryPermission
 
 
 class BlogEntryViewSet(CreateModelMixin, ListModelMixin, RetrieveModelMixin,
@@ -12,6 +13,7 @@ class BlogEntryViewSet(CreateModelMixin, ListModelMixin, RetrieveModelMixin,
     queryset = BlogEntry.objects.all().order_by('-created_at')
     pagination_class = BlogEntryPagination
     serializer_class = BlogEntrySerializer
+    permission_classes = (BlogEntryPermission, )
 
     def perform_create(self, serializer):
         serializer.save(author=serializer.context['request'].user)
