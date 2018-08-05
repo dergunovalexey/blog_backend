@@ -10,6 +10,8 @@ class BlogEntryFileSerializer(serializers.ModelSerializer):
 
 class BlogEntrySerializer(serializers.ModelSerializer):
     files = BlogEntryFileSerializer(many=True, required=False)
+    created_at = serializers.DateTimeField(format='%d.%m.%Y %H:%M',
+                                           read_only=True)
 
     class Meta:
         model = BlogEntry
