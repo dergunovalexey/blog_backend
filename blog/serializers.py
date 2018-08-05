@@ -5,14 +5,22 @@ from blog.models import BlogEntryFile, BlogEntry
 class BlogEntryFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogEntryFile
+        fields = ('file', )
 
 
 class BlogEntrySerializer(serializers.ModelSerializer):
-    files = BlogEntryFileSerializer(source='files', many=True)
+    files = BlogEntryFileSerializer(many=True, required=True)
 
     class Meta:
         model = BlogEntry
-        fields = ('id', 'title', 'body', 'link', 'preview',
+        fields = ('id', 'author', 'title', 'body', 'link', 'preview',
                   'description', 'likes', 'created_at', 'files')
-        read_only_fields = ('id', 'preview', 'description',
+        read_only_fields = ('id', 'author', 'preview', 'description',
                             'likes', 'created_at')
+
+
+class BlogEntryListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BlogEntry
+        fields = ('id', 'author', 'title', 'likes', 'created_at')
+        read_only_fields = ('id', 'author', 'likes', 'created_at')
