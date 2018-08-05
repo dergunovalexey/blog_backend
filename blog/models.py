@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 
 class BlogEntry(models.Model):
@@ -9,6 +10,8 @@ class BlogEntry(models.Model):
     preview = models.ImageField(upload_to='blog/blog_entry/preview/',
                                 blank=True, null=True)
     description = models.TextField(blank=True)
+    likes = ArrayField(models.IntegerField(), default=list, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
