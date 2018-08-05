@@ -16,6 +16,10 @@ class BlogEntry(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        self.likes = list(set(self.likes))
+        super().save(*args, **kwargs)
+
 
 class BlogEntryFile(models.Model):
     blog_entry = models.ForeignKey('blog.BlogEntry', related_name='files')
