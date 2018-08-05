@@ -6,8 +6,17 @@ class BlogEntry(models.Model):
     title = models.CharField(max_length=128)
     body = models.TextField()
     link = models.URLField(blank=True, null=True)
-    preview = models.ImageField(blank=True, null=True)
+    preview = models.ImageField(upload_to='blog/blog_entry/preview/',
+                                blank=True, null=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
         return self.title
+
+
+class BlogEntryFile(models.Model):
+    blog_entry = models.ForeignKey('blog.BlogEntry')
+    file = models.FileField(upload_to='blog/blog_entry/file/')
+
+    def __str__(self):
+        return 'File to '.format(self.blog_entry.title)
