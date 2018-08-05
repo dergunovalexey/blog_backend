@@ -18,7 +18,7 @@ class BlogEntry(models.Model):
 
 
 class BlogEntryFile(models.Model):
-    blog_entry = models.ForeignKey('blog.BlogEntry')
+    blog_entry = models.ForeignKey('blog.BlogEntry', related_name='files')
     file = models.FileField(upload_to='blog/blog_entry/file/')
 
     def __str__(self):
