@@ -7,10 +7,11 @@ class BlogEntry(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=128)
     body = models.TextField()
-    link = models.URLField(blank=True, null=True)
+    link = models.URLField(blank=True)
     preview = models.URLField(blank=True, null=True)
     description = models.TextField(blank=True)
-    likes = ArrayField(models.IntegerField(), default=list, blank=True)
+    likes = ArrayField(models.IntegerField(), default=list, blank=True,
+                       help_text='users id')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
