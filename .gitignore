@@ -4,6 +4,8 @@
 settings_local.py
 *pycache*
 
+celerybeat-schedule
+
 media/*
 
 env
