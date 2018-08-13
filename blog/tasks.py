@@ -1,12 +1,10 @@
-from celery import Celery
 from django.apps import apps
 import requests
 from bs4 import BeautifulSoup
+from celery import shared_task
 
 
-app = Celery('blog_tasks', broker='redis://localhost:6379/0')
-
-@app.task
+@shared_task
 def get_preview_description(id):
     """
     save description and preview from url

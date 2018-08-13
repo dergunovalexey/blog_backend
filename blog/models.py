@@ -18,13 +18,18 @@ class BlogEntry(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        if not self.id:
+            id = False
+        else:
+            id = True
         # delete duplicate elements
         self.likes = list(set(self.likes))
 
         super().save(*args, **kwargs)
 
-        # get description and preview from link
-        get_preview_description.delay(self.id)
+        if not id:
+            # get description and preview from link
+            get_preview_description.apply_async(args=(self.id, ))
 
 
 class BlogEntryFile(models.Model):
