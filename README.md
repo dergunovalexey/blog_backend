@@ -1,4 +1,4 @@
-# RESTfil backend to simple blog
+# RESTful backend to simple blog
 
 ## Run project
 
@@ -8,7 +8,7 @@
 2. Activate env
 > source env/bin/activate
 
-3. Install packeges
+3. Install packages
 > pip install -r requirements.txt
 
 4. Create local settings file
